@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="3bc2f768-8613-42e9-adef-fff8ebbd5a4f" activeEnvironment="Default" name="REST Project 1" resourceRoot="" soapui-version="5.7.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="2e14ce16-0a9a-4729-a12d-30fcf1a1878e" wadlVersion="http://wadl.dev.java.net/2009/02" name="https://restcountries.com" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>https://restcountries.com</con:endpoint></con:endpoints><con:resource name="Lkr" path="/v3.1/currency/lkr" id="a9fe8775-e60f-4b9f-9768-ff55415d33a8"><con:settings/><con:parameters><con:parameter><con:name>hello</con:name><con:style>TEMPLATE</con:style></con:parameter></con:parameters><con:method name="Lkr 1" id="8e5f705c-5a22-48b2-8044-e414fbdbf636" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:request name="Request 1" id="bc093841-b223-44df-b021-422db3a8d566" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://restcountries.com</con:endpoint><con:request/><con:originalUri>https://restcountries.com/v3.1/currency/lkr</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="hello" value="inr"/>
+  <con:entry key="india" value="inr"/>
+</con:parameters><con:parameterOrder><con:entry/></con:parameterOrder></con:request></con:method></con:resource></con:interface><con:testSuite id="60acf50c-2421-434d-b4fb-380621144a26" name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="713ca688-bee9-48da-b754-77dacfae6f3f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="groovy" name="Groovy Script" id="91679297-007f-4be9-8e1b-a5a693976f88"><con:settings/><con:config><script>import jxl.*
+import jxl.write.*
+Workbook work = Workbook.getWorkbook(new File("C:\\Users\\91846\\Desktop.xls"));
+Sheet sh = work.getsheet(0)
+rc =sh.getRows();
+cc=sh.getColumns();
+log.info"rows count="+rc
+log.info"column count"+cc
+for(int i=o;i&lt;rc;i++)
+{
+	for(int j=0;j&lt;cc;j++)
+	{
+		cell var=sh.getcell(j,i);
+		log.info var.getContents()
+	}
+}
+work.close();</script></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script 1" id="2d00b495-14b8-489a-b377-a3ee0fa290fe"><con:settings/><con:config><script>testRunner.testCase.testSuite.setPropertyValue("capital","Colombo")
+
+def currency =testRunner.testCase.testSuite.getPropertyValue("capital")
+
+log.info(currency)
+
+def tCase =testRunner.testCase.testSuite.testCases["TestCase 1"]
+
+def getIdTestStep=tCase.testSteps["REST Request"]
+
+getIdTestStep.run(testRunner,context)
+
+def responseJson=getIdTestStep.testRequest.response.responseContent
+
+log.info(responseJson)
+
+def jsonSlurper = new JsonSlurper()
+
+def object =jsonSlurper.parseText(responseJson)</script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite id="f45c7843-7626-4650-a236-c9e00903838c" name="restcountries.com TestSuite"><con:description>TestSuite generated for REST Service [https://restcountries.com]</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="11bf174c-ea87-4a4c-9678-b4e326527cbd" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="https://restcountries.com TestSuite" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="Lkr" id="f6570975-24b9-4fb2-ab63-acbf995dfd88"><con:settings/><con:config service="https://restcountries.com" resourcePath="/v3.1/currency/lkr" methodName="Lkr 1" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Lkr" id="bc093841-b223-44df-b021-422db3a8d566" mediaType="application/json"><con:settings/><con:endpoint>https://restcountries.com</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
